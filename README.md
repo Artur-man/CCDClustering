@@ -29,16 +29,12 @@ source("../Kest.R")
 # generate data
 n <- 200
 c1.mu <- c(0,0)
-c2.mu <- c(3,0)
-inter <- 1
-datax <- matrix(c(runif(n,c1.mu[1]-inter,c1.mu[1]+inter),
-                  runif(n,c1.mu[2]-inter,c1.mu[2]+inter)),
-                byrow=F,nrow=n)
-datay <- matrix(c(runif(n,c2.mu[1]-inter,c2.mu[1]+inter),
-                  runif(n,c2.mu[2]-inter,c2.mu[2]+inter)),
-                byrow=F,nrow=n)
+c2.mu <- c(5,0)
+sigma <- diag(2)
+datax <- mvrnorm(n,c1.mu,sigma)
+datay <- mvrnorm(n,c2.mu,sigma)
 dataf <- rbind(datax,datay)
-ddataf <- ddataf <- as.matrix(dist(dataf))
+ddataf <- as.matrix(dist(dataf))
 
 # train clustering with CCDs
 simul <- Kest.simpois(n,2,50,99)
