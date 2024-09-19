@@ -27,6 +27,7 @@ source("ccdfunctions.R")
 source("Kest.R")
 
 # generate data
+set.seed(1)
 n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(5,0)
@@ -37,8 +38,8 @@ dataf <- rbind(datax,datay)
 ddataf <- as.matrix(dist(dataf))
 
 # train clustering with CCDs
-simul <- Kest.simpois(n,2,50,99)
-ccd.sim <- rccd.clustering(dataf, low.num=10, r.seq=50, dom.method = "greedy2", simul)
+simul <- Kest.simpois.edge(n,2,50,99)
+ccd.sim <- rccd.clustering_correct(dataf, low.num=10, r.seq=50, dom.method = "greedy2", simul)
 
 # find the best covering balls
 ccd.si <- rccd.silhouette(ccd.sim,ddataf)

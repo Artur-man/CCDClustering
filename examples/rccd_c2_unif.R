@@ -11,6 +11,7 @@ source("../ccdfunctions.R")
 source("../Kest.R")
 
 # the main code
+set.seed(1)
 n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(3,0)
@@ -25,8 +26,8 @@ dataf <- rbind(datax,datay)
 ddataf <- ddataf <- as.matrix(dist(dataf))
 
 # the ccd.clustering code
-simul <- Kest.simpois(n,2,50,99)
-ccd.sim <- rccd.clustering(dataf, low.num=10, r.seq=50, dom.method = "greedy2", simul)
+simul <- Kest.simpois.edge(n,2,50,99)
+ccd.sim <- rccd.clustering_correct(dataf, low.num=10, r.seq=50, dom.method = "greedy2", simul)
 
 # find the best partitioning
 ccd.si <- rccd.silhouette(ccd.sim,ddataf)
