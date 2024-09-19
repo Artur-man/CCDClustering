@@ -1,21 +1,5 @@
-CCD Clustering
-=====
+# this code is for the simulation of trying CCD codes
 
-Unsupervised Learning with Cluster Catch Digraphs (CCDs)
-
-
-Installation
-------------
-
-``` r
-library(devtools)
-devtools::install_github("Artur-man/CCDClustering")
-```
-
-Example
--------
-
-``` r
 # library
 library(MASS)
 library(cluster)
@@ -26,7 +10,7 @@ source("../functions.R")
 source("../ccdfunctions.R")
 source("../Kest.R")
 
-# generate data
+# the main code
 n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(3,0)
@@ -40,17 +24,17 @@ datay <- matrix(c(runif(n,c2.mu[1]-inter,c2.mu[1]+inter),
 dataf <- rbind(datax,datay)
 ddataf <- ddataf <- as.matrix(dist(dataf))
 
-# train clustering with CCDs
+# the ccd.clustering code
 simul <- Kest.simpois(n,2,50,99)
 ccd.sim <- rccd.clustering(dataf, low.num=10, r.seq=50, dom.method = "greedy2", simul)
 
-# find the best covering balls
+# find the best partitioning
 ccd.si <- rccd.silhouette(ccd.sim,ddataf)
 lind <- ccd.si$si.ind
 ccd.sim$Int.D <- ccd.sim$Int.D[1:lind]
 ccd.sim$Int.R <- ccd.sim$Int.R[1:lind]
 
-# print the clusters
+# print the clusters, use 1200 500
 par(mar=c(0,0,0,0))
 plot(dataf,xlab="",ylim=c(-2.3,1.75),ylab="",pch=16,cex=1.5,axes=FALSE)
 box()
@@ -58,6 +42,3 @@ D <- ccd.sim$Int.D
 R <- ccd.sim$Int.R
 for(i in 1:length(D))
   draw.circle(dataf[D[i],1],dataf[D[i],2],R[i],lwd=2)
-```
-
-![](figures/clusters_normal.png)
