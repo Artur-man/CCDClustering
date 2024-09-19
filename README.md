@@ -21,10 +21,10 @@ library(MASS)
 library(cluster)
 
 # source codes
-source("../ccd_ripley.R")
-source("../functions.R")
-source("../ccdfunctions.R")
-source("../Kest.R")
+source("ccd_ripley.R")
+source("functions.R")
+source("ccdfunctions.R")
+source("Kest.R")
 
 # generate data
 n <- 200
