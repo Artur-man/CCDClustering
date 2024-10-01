@@ -3,7 +3,7 @@
 # library
 library(MASS)
 library(cluster)
-library(e1071)
+library(pdfCluster)
 
 # the main code
 set.seed(1)
@@ -20,12 +20,12 @@ datay <- matrix(c(runif(n,c2.mu[1]-inter,c2.mu[1]+inter),
 dataf <- rbind(datax,datay)
 ddataf <- ddataf <- as.matrix(dist(dataf))
 
-# Fuzzy C means clustering
-k <- 2
-result <- cmeans(dataf,k)
-# result <- cmeans.cluster(clus.fuzzy$centers, dataf)
+# pdfcluster Clustering
+h <- 0.5
+clus.data <- pdfCluster(dataf, h = h)
+clus <- groups(clus.data)
 
 # print the clusters, use 1200 500
 par(mar=c(0,0,0,0))
-plot(dataf,xlab="",ylim=c(-2.3,1.75),ylab="",pch=16,cex=1.5,axes=FALSE, col = result$cluster)
+plot(dataf,xlab="",ylim=c(-2.3,1.75),ylab="",pch=16,cex=1.5,axes=FALSE, col = clus)
 box()
