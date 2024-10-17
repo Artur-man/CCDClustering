@@ -12,7 +12,7 @@ source("../scripts/ccdfunctions.R")
 source("../scripts/Kest.R")
 
 # the main code
-# set.seed(1)
+set.seed(1)
 n <- 100
 c1.mu <- c(0,0)
 c2.mu <- c(3,0)

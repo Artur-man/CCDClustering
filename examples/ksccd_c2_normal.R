@@ -24,7 +24,7 @@ ddataf <- as.matrix(dist(dataf))
 ddataf <- ddataf <- as.matrix(dist(dataf))
 
 # the ccd.clustering code
-m <- 1
+m <- 0.1
 ccd.sim <- ksccd.clustering(dataf, m = m, dom.method = "greedy2")
 
 # find the best partitioning
