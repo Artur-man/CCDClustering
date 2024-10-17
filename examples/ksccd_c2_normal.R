@@ -5,11 +5,11 @@ library(MASS)
 library(cluster)
 
 # source codes
-source("../ccd_ks.R")
-source("../ccd_ripley.R")
-source("../functions.R")
-source("../ccdfunctions.R")
-source("../Kest.R")
+source("../scripts/ccd_ks.R")
+source("../scripts/ccd_ripley.R")
+source("../scripts/functions.R")
+source("../scripts/ccdfunctions.R")
+source("../scripts/Kest.R")
 
 # the main code
 set.seed(1)

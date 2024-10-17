@@ -5,11 +5,11 @@ library(MASS)
 library(cluster)
 
 # source codes
-source("../ccd_ks.R")
-source("../ccd_ripley.R")
-source("../functions.R")
-source("../ccdfunctions.R")
-source("../Kest.R")
+source("../scripts/ccd_ks.R")
+source("../scripts/ccd_ripley.R")
+source("../scripts/functions.R")
+source("../scripts/ccdfunctions.R")
+source("../scripts/Kest.R")
 
 # the main code
 # set.seed(1)
@@ -24,10 +24,10 @@ datay <- matrix(c(runif(n,c2.mu[1]-inter,c2.mu[1]+inter),
                   runif(n,c2.mu[2]-inter,c2.mu[2]+inter)),
                 byrow=F,nrow=n)
 dataf <- rbind(datax,datay)
-ddataf <- ddataf <- as.matrix(dist(dataf))
+ddataf <- as.matrix(dist(dataf))
 
 # the ccd.clustering code
-m <- 0.7
+m <- 0.3
 ccd.sim <- ksccd.clustering(dataf, m = m, dom.method = "greedy2")
 
 # find the best partitioning
@@ -44,3 +44,4 @@ D <- ccd.sim$Int.D
 R <- ccd.sim$Int.R
 for(i in 1:length(D))
   draw.circle(dataf[D[i],1],dataf[D[i],2],R[i],lwd=2)
+

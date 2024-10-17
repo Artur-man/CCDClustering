@@ -5,12 +5,6 @@ library(MASS)
 library(cluster)
 library(e1071)
 
-# source codes
-source("../ccd_ripley.R")
-source("../functions.R")
-source("../ccdfunctions.R")
-source("../Kest.R")
-
 # the main code
 set.seed(1)
 n <- 200

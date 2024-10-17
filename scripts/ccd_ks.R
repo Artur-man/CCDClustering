@@ -15,7 +15,7 @@ ksccd.clustering <- function(datax,m,sequential=FALSE,
   nr <- nrow(datax)
   nc <- ncol(datax)
   ddatax <- as.matrix(dist(datax))
-  ddatax <- ddatax/max(ddatax)
+  # ddatax <- ddatax/max(ddatax)
   mac.eps <- .Machine$double.eps
   
   # find all radii, and the dominating set 
