@@ -3,6 +3,7 @@
 # library
 library(MASS)
 library(cluster)
+library(fossil)
 
 # source codes
 source("../scripts/ccd_ks.R")
@@ -16,6 +17,7 @@ set.seed(1)
 n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(5,0)
+clsdata <- rep(1:2, c(n,n))
 sigma <- diag(2)
 datax <- mvrnorm(n,c1.mu,sigma)
 datay <- mvrnorm(n,c2.mu,sigma)
@@ -41,3 +43,8 @@ D <- ccd.sim$Int.D
 R <- ccd.sim$Int.R
 for(i in 1:length(D))
   draw.circle(dataf[D[i],1],dataf[D[i],2],R[i],lwd=2)
+
+# calculate rand index
+result <- rccd.clustering.nonvalid(ccd.sim,ddataf)
+print(adj.rand.index(result, clsdata))
+print(rand.index(result, clsdata))

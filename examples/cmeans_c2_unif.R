@@ -4,12 +4,18 @@
 library(MASS)
 library(cluster)
 library(e1071)
+library(fossil)
+library(flexclust)
+
+# source codes
+source("../scripts/fuzzy.R")
 
 # the main code
 set.seed(1)
 n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(3,0)
+clsdata <- rep(1:2, c(n,n))
 inter <- 1
 datax <- matrix(c(runif(n,c1.mu[1]-inter,c1.mu[1]+inter),
                   runif(n,c1.mu[2]-inter,c1.mu[2]+inter)),
@@ -29,3 +35,8 @@ result <- cmeans(dataf,k)
 par(mar=c(0,0,0,0))
 plot(dataf,xlab="",ylim=c(-2.3,1.75),ylab="",pch=16,cex=1.5,axes=FALSE, col = result$cluster)
 box()
+
+# calculate rand index
+kresult <- cmeans.valid(result$centers,dataf,clsdata)
+print(adj.rand.index(kresult, clsdata))
+print(rand.index(kresult, clsdata))

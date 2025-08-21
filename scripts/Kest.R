@@ -368,6 +368,8 @@ Kest.simpois.edge <- function(m,d,rn,niter){
   r <- seq(1/rn,1,1/rn)
 
   # simulation
+  if(requireNamespace("progress"))
+    pb <- progress_bar$new(total = niter, clear = FALSE)
   Kest.m <- NULL
   for(i in 1:niter){
     
@@ -398,6 +400,7 @@ Kest.simpois.edge <- function(m,d,rn,niter){
       return(sumM/((1:m)*(1:m)))
     },simplify=TRUE)
     Kest.m <- rbind(Kest.m,as.vector(result))
+    pb$tick()
   }
   
   Kest.max <- apply(Kest.m,2,max)

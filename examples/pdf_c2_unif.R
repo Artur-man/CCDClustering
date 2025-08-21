@@ -4,12 +4,14 @@
 library(MASS)
 library(cluster)
 library(pdfCluster)
+library(fossil)
 
 # the main code
 set.seed(1)
 n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(3,0)
+clsdata <- rep(1:2, c(n,n))
 inter <- 1
 datax <- matrix(c(runif(n,c1.mu[1]-inter,c1.mu[1]+inter),
                   runif(n,c1.mu[2]-inter,c1.mu[2]+inter)),
@@ -29,3 +31,7 @@ clus <- groups(clus.data)
 par(mar=c(0,0,0,0))
 plot(dataf,xlab="",ylim=c(-2.3,1.75),ylab="",pch=16,cex=1.5,axes=FALSE, col = clus)
 box()
+
+# calculate rand index
+print(adj.rand.index(clus, clsdata))
+print(rand.index(clus, clsdata))

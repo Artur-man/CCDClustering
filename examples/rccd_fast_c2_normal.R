@@ -4,6 +4,7 @@
 library(MASS)
 library(cluster)
 library(progress)
+library(fossil)
 
 # source codes
 source("../scripts/ccd_ripley.R")
@@ -13,9 +14,10 @@ source("../scripts/Kest.R")
 
 # the main code
 set.seed(1)
-n <- 100
+n <- 200
 c1.mu <- c(0,0)
 c2.mu <- c(5,0)
+clsdata <- rep(1:2, c(n,n))
 sigma <- diag(2)
 datax <- mvrnorm(n,c1.mu,sigma)
 datay <- mvrnorm(n,c2.mu,sigma)
@@ -24,8 +26,10 @@ ddataf <- as.matrix(dist(dataf))
 ddataf <- ddataf <- as.matrix(dist(dataf))
 
 # the ccd.clustering code
-simul <- Kest.simpois.edge(n,2,50,99)
+# simul <- Kest.simpois.edge(n,2,50,99)
+start <- proc.time()
 ccd.sim <- rccd.clustering_correct_fast(dataf, low.num=10, r.seq=50, dom.method = "greedy2", simul)
+print(proc.time() - start)
 
 # find the best partitioning
 ccd.si <- rccd.silhouette(ccd.sim,ddataf)
@@ -41,3 +45,8 @@ D <- ccd.sim$Int.D
 R <- ccd.sim$Int.R
 for(i in 1:length(D))
   draw.circle(dataf[D[i],1],dataf[D[i],2],R[i],lwd=2)
+
+# calculate rand index
+result <- rccd.clustering.nonvalid(ccd.sim,ddataf)
+print(adj.rand.index(result, clsdata))
+print(rand.index(result, clsdata))
