@@ -319,7 +319,7 @@ rccd.clustering_correct_fast <- function(datax,low.num,r.seq,
   catch <- rowSums(MDInt)/(Int.R^2)
   
   
-  return(list(Int.D=Int.D,Int.R=Int.R,D=D,R=R, catch=catch))
+  return(list(Int.D=Int.D,Int.R=Int.R,D=D,R=R,all_radii=r,catch=catch))
 }
 
 # the validation function for the clusters
